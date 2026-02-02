@@ -5,7 +5,7 @@
 synth: ## Translates ts files into json that is then fed to cfn
 	npx cdk synth
 
-bootstrap: ## Sets preprequisites for `cdk deploy`
+bootstrap: ## Deploys prerequisites for running `cdk deploy`
 	npx cdk bootstrap
 
 list: ## Lists all available stacks
