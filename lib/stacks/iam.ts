@@ -30,8 +30,12 @@ export class IamStack extends cdk.Stack {
 					"application-autoscaling:*",
 					"cognito-idp:*",
 				],
-				// Restrict resources to '*' to avoid "Resource vendor must be fully qualified" error
 				resources: ["*"],
+				conditions: {
+					StringEquals: {
+						"aws:ResourceAccount": this.account,
+					},
+				},
 			}),
 		);
 
