@@ -59,23 +59,29 @@ export class NetworkStack extends cdk.Stack {
 			"HeaderBlockFunction",
 			{
 				code: cloudfront.FunctionCode.fromInline(`
-          function handler(event) {
-            var request = event.request;
-            var headers = request.headers;
-            if (headers['x-explioit-activate'] && headers['x-explioit-activate'].value === 'true') {
-              return {
-                statusCode: 403,
-                statusDescription: 'Forbidden',
-                headers: {
-                  'content-type': { value: 'text/plain' }
-                },
-                body: { value: 'Blocked by header policy' }
-              };
-            }
-            return request;
-          }
+function handler(event) {
+  var request = event.request;
+  var headers = request.headers;
+
+  if (headers['x-exploit-activate'] && headers['x-exploit-activate'].value === 'true') {
+    return {
+      statusCode: 403,
+      statusDescription: 'Forbidden',
+      headers: {
+        'content-type': {
+          value: 'text/plain'
+        }
+      },
+      body: {
+        encoding: 'text',
+        data: 'princess is in another castle'
+      }
+    };
+  }
+
+  return request;
+}
         `),
-				comment: "Block requests with X-Explioit-Activate: true",
 			},
 		);
 
