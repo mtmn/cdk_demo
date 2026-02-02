@@ -1,0 +1,3 @@
+- run this from github actions and use oidc+iam role
+- make use of output more across stacks (i.e. only allowing inbound traffic on alb from cloudfront)
+- make output more verbose (?)
